@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: FakeCommerce
+  datasource:
+    url: jdbc:mysql://localhost:3306/fakecommerce
+    username: root
+    password: root@12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
