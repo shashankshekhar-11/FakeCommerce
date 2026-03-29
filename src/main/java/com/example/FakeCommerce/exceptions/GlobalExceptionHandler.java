@@ -5,17 +5,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.FakeCommerce.utils.ApiResponse;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleAllGenerlExceptions(Exception ex){
+    public ResponseEntity<ApiResponse<Void>> handleAllGenerlExceptions(Exception ex){
         return ResponseEntity
                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-               .body("Something Went Wrong");
+               .body(ApiResponse.error("Something went wrong","Internal Server Error"));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundExceptions(ResourceNotFoundException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    public ResponseEntity<ApiResponse<Void>> handleResourceNotFoundExceptions(ResourceNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(ex.getMessage(), "Resource not found"));
     }
 }
