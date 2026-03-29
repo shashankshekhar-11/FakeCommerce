@@ -1,14 +1,17 @@
 package com.example.FakeCommerce.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.example.FakeCommerce.dtos.CreateProductRequestDto;
 import com.example.FakeCommerce.dtos.GetProductResponseDto;
 import com.example.FakeCommerce.dtos.GetProductWithDetailsResponseDto;
+import com.example.FakeCommerce.exceptions.BadRequestException;
+import com.example.FakeCommerce.exceptions.ResourceDeletionException;
+import com.example.FakeCommerce.exceptions.ResourceNotFoundException;
 import com.example.FakeCommerce.repositories.ProductRepository;
 import com.example.FakeCommerce.schema.Category;
 import com.example.FakeCommerce.schema.Product;
@@ -53,6 +56,10 @@ public class ProductService  {
     }
 
     public GetProductResponseDto getProductById(Long id){
+         if (id == null || id <= 0) {
+            throw new BadRequestException("Product id must be a positive number");
+        }
+
          return productRepository.findById(id)
             .map(product -> GetProductResponseDto.builder()
                 .id(product.getId())
@@ -62,11 +69,17 @@ public class ProductService  {
                 .image(product.getImage())
                 .rating(product.getRating())
                 .build())
-            .orElseThrow(() -> new RuntimeException("Product not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
     }
 
     public GetProductWithDetailsResponseDto getProductWithDetailsById(Long id){
-        Product product = productRepository.findProductWithDetailsById(id).get(0);
+        if (id == null || id <= 0) {
+            throw new BadRequestException("Product id must be a positive number");
+        }
+
+        Product product = productRepository.findProductWithDetailsById(id).stream()
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         return GetProductWithDetailsResponseDto.builder()
                                                 .id(product.getId())
                                                 .title(product.getTitle())
@@ -79,6 +92,12 @@ public class ProductService  {
     }
 
     public Product createProduct(CreateProductRequestDto requestDto){
+        if (requestDto == null) {
+            throw new BadRequestException("Request body is required");
+        }
+        if (requestDto.getCategoryId() == null || requestDto.getCategoryId() <= 0) {
+            throw new BadRequestException("Category id must be a positive number");
+        }
        
         Category category = categoryService.getCategoryById(
             requestDto.getCategoryId()
@@ -95,11 +114,26 @@ public class ProductService  {
 
         return productRepository.save(newProduct);
     } 
-        public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    public void deleteProduct(Long id) {
+        if (id == null || id <= 0) {
+            throw new BadRequestException("Product id must be a positive number");
+        }
+
+        if (!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Product with id " + id + " not found");
+        }
+
+        try {
+            productRepository.deleteById(id);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ResourceDeletionException("Product with id " + id + " cannot be deleted because it is linked to other records");
+        }
     }
 
     public List<Product> getProductsByCategory(String category) {
+        if (category == null || category.trim().isEmpty()) {
+            throw new BadRequestException("categoryName query parameter is required");
+        }
         return productRepository.findByCategory(category);
     }
 
