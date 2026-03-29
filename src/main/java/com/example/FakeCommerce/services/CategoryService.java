@@ -1,8 +1,12 @@
 package com.example.FakeCommerce.services;
 
 import java.util.List;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 import com.example.FakeCommerce.dtos.CreateCategoryRequestDto;
+import com.example.FakeCommerce.exceptions.ResourceDeletionException;
 import com.example.FakeCommerce.exceptions.ResourceNotFoundException;
 import com.example.FakeCommerce.repositories.CategoryRepository;
 import com.example.FakeCommerce.schema.Category;
@@ -27,10 +31,17 @@ public class CategoryService {
 
     public Category getCategoryById(Long id){
         return categoryRepository.findById(id)
-        .orElseThrow(()->new ResourceNotFoundException("Category wit id"+id+"not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Category with id " + id + " not found"));
     }
 
     public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
+        if (!categoryRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Category with id " + id + " not found");
+        }
+        try {
+            categoryRepository.deleteById(id);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ResourceDeletionException("Category with id " + id + " cannot be deleted because it is linked to other records");
+        }
     }
 }
