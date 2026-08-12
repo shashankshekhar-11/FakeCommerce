@@ -36,4 +36,9 @@ out/
 ### VS Code ###
 .vscode/
 
-/env
+### Environment & secrets ###
+.env
+
+### New Relic (download agent locally; keep secrets out of git) ###
+newrelic/newrelic.jar
+newrelic/logs/
