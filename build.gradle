@@ -1,3 +1,4 @@
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.2'
@@ -29,6 +30,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	implementation 'org.springframework.boot:spring-boot-starter-flyway' // dep changed from flyway-core
 	implementation 'org.flywaydb:flyway-mysql'
+	
+implementation platform('me.paulschwarz:spring-dotenv-bom:5.1.0')
+    developmentOnly 'me.paulschwarz:springboot4-dotenv'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -44,3 +49,17 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.named('bootRun') {
+    def envFile = file('.env')
+    if (envFile.exists()) {
+        envFile.readLines().each { line ->
+            if (line && !line.startsWith('#') && line.contains('=')) {
+                def (key, value) = line.split('=', 2)
+                environment key.trim(), value.trim()
+            }
+        }
+    }
+    jvmArgs = ['-javaagent:newrelic/newrelic.jar']
+}
+
