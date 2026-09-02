@@ -17456,3 +17456,112 @@
 2026-08-12T00:34:43,770+0530 [29880 57] com.newrelic INFO: Real user monitoring is enabled for application SpringbootFakeCommerceDev. Auto instrumentation is enabled.
 2026-08-12T00:34:43,771+0530 [29880 57] com.newrelic INFO: Updating shared Adaptive Sampler sampling target to 120
 2026-08-12T00:34:43,772+0530 [29880 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-08-12T22:33:04,269+0530 [24536 1] com.newrelic INFO: Writing to New Relic log file: C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\logs\newrelic_agent.log
+2026-08-12T22:33:04,273+0530 [24536 1] com.newrelic INFO: JRE vendor Oracle Corporation version 21.0.4
+2026-08-12T22:33:04,273+0530 [24536 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 21.0.4+8-LTS-274
+2026-08-12T22:33:04,274+0530 [24536 1] com.newrelic INFO: OS Windows 11 version 10.0 arch amd64
+2026-08-12T22:33:04,275+0530 [24536 1] com.newrelic INFO: Agent Host: Shashank IP: 10.101.190.146
+2026-08-12T22:33:04,276+0530 [24536 1] com.newrelic INFO: New Relic Agent v9.3.0 is initializing...
+2026-08-12T22:33:04,368+0530 [24536 1] com.newrelic INFO: AgentCollectionFactory: Using Caffeine 3.x for Java 21
+2026-08-12T22:33:06,336+0530 [24536 36] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2026-08-12T22:33:09,403+0530 [24536 1] com.newrelic INFO: Started Adaptive Sampler with sampling target 120 and report period 60 seconds.
+2026-08-12T22:33:09,406+0530 [24536 1] com.newrelic INFO: The full granularity root sampler was configured to use the adaptive sampler type.
+2026-08-12T22:33:09,406+0530 [24536 1] com.newrelic INFO: The full granularity remote_parent_sampled sampler was configured to use the adaptive sampler type.
+2026-08-12T22:33:09,406+0530 [24536 1] com.newrelic INFO: The full granularity remote_parent_not_sampled sampler was configured to use the adaptive sampler type.
+2026-08-12T22:33:09,415+0530 [24536 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2026-08-12T22:33:09,998+0530 [24536 1] com.newrelic INFO: Setting audit_mode to false
+2026-08-12T22:33:10,424+0530 [24536 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\.\newrelic.yml
+2026-08-12T22:33:10,436+0530 [24536 1] com.newrelic INFO: New Relic Agent v9.3.0 has started
+2026-08-12T22:33:10,436+0530 [24536 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@2a098129
+2026-08-12T22:33:10,437+0530 [24536 1] com.newrelic INFO: Premain startup complete in 8,708ms
+2026-08-12T22:33:10,442+0530 [24536 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2026-08-12T22:33:24,379+0530 [24536 61] com.newrelic INFO: Server Info: Apache Tomcat/11.0.15
+2026-08-12T22:33:45,512+0530 [24536 57] com.newrelic INFO: Host name is Shashank, display host Shashank for application SpringbootFakeCommerceDev
+2026-08-12T22:33:45,516+0530 [24536 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-08-12T22:33:46,724+0530 [24536 57] com.newrelic INFO: Collector redirection to collector.newrelic.com:443
+2026-08-12T22:33:47,443+0530 [24536 57] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2026-08-12T22:33:47,444+0530 [24536 57] com.newrelic INFO: Agent run id: BUyZRkqjsz4TAHp-U1crw25qfKe8AAIBAAAnIQEAAF_YAgRXK8WJAwAFOS4zLjAACFNoYXNoYW5rABlTcHJpbmdib290RmFrZUNvbW1lcmNlRGV2
+2026-08-12T22:33:47,444+0530 [24536 57] com.newrelic INFO: Agent 24536@Shashank/SpringbootFakeCommerceDev connected to collector.newrelic.com:443
+2026-08-12T22:33:47,445+0530 [24536 57] com.newrelic INFO: Reporting to: https://one.newrelic.com/redirect/entity/ODAyNzczMXxBUE18QVBQTElDQVRJT058MTQ2MjQ4NjQwOQ
+2026-08-12T22:33:47,451+0530 [24536 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-08-12T22:33:47,451+0530 [24536 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-08-12T22:33:47,451+0530 [24536 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-08-12T22:33:47,460+0530 [24536 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-08-12T22:33:47,460+0530 [24536 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-08-12T22:33:47,461+0530 [24536 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-08-12T22:33:49,003+0530 [24536 57] com.newrelic INFO: Real user monitoring is enabled for application SpringbootFakeCommerceDev. Auto instrumentation is enabled.
+2026-08-12T22:33:49,003+0530 [24536 57] com.newrelic INFO: Updating shared Adaptive Sampler sampling target to 120
+2026-08-12T22:33:49,006+0530 [24536 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-08-12T22:58:52,592+0530 [24536 86] com.newrelic ERROR: Remote log_event_data call failed : java.net.UnknownHostException: No such host is known (collector.newrelic.com).
+2026-08-28T01:08:36,596+0530 [336 1] com.newrelic INFO: Writing to New Relic log file: C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\logs\newrelic_agent.log
+2026-08-28T01:08:36,597+0530 [336 1] com.newrelic INFO: JRE vendor Oracle Corporation version 21.0.4
+2026-08-28T01:08:36,597+0530 [336 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 21.0.4+8-LTS-274
+2026-08-28T01:08:36,597+0530 [336 1] com.newrelic INFO: OS Windows 11 version 10.0 arch amd64
+2026-08-28T01:08:36,598+0530 [336 1] com.newrelic INFO: Agent Host: Shashank IP: 10.101.190.215
+2026-08-28T01:08:36,598+0530 [336 1] com.newrelic INFO: New Relic Agent v9.3.0 is initializing...
+2026-08-28T01:08:36,645+0530 [336 1] com.newrelic INFO: AgentCollectionFactory: Using Caffeine 3.x for Java 21
+2026-08-28T01:08:38,321+0530 [336 36] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2026-08-28T01:08:41,157+0530 [336 1] com.newrelic INFO: Started Adaptive Sampler with sampling target 120 and report period 60 seconds.
+2026-08-28T01:08:41,160+0530 [336 1] com.newrelic INFO: The full granularity root sampler was configured to use the adaptive sampler type.
+2026-08-28T01:08:41,160+0530 [336 1] com.newrelic INFO: The full granularity remote_parent_sampled sampler was configured to use the adaptive sampler type.
+2026-08-28T01:08:41,161+0530 [336 1] com.newrelic INFO: The full granularity remote_parent_not_sampled sampler was configured to use the adaptive sampler type.
+2026-08-28T01:08:41,169+0530 [336 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2026-08-28T01:08:41,620+0530 [336 1] com.newrelic INFO: Setting audit_mode to false
+2026-08-28T01:08:41,930+0530 [336 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\.\newrelic.yml
+2026-08-28T01:08:41,940+0530 [336 1] com.newrelic INFO: New Relic Agent v9.3.0 has started
+2026-08-28T01:08:41,940+0530 [336 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@2a098129
+2026-08-28T01:08:41,940+0530 [336 1] com.newrelic INFO: Premain startup complete in 7,673ms
+2026-08-28T01:08:41,945+0530 [336 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2026-08-28T01:08:51,041+0530 [336 61] com.newrelic INFO: Server Info: Apache Tomcat/11.0.15
+2026-08-28T01:09:12,008+0530 [336 57] com.newrelic INFO: Host name is Shashank, display host Shashank for application SpringbootFakeCommerceDev
+2026-08-28T01:09:12,011+0530 [336 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-08-28T01:09:13,394+0530 [336 57] com.newrelic INFO: Collector redirection to collector.newrelic.com:443
+2026-08-28T01:09:14,208+0530 [336 57] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2026-08-28T01:09:14,209+0530 [336 57] com.newrelic INFO: Agent run id: BQd8xtTbXLtlAHp-U1crw25qkJLMAAIBAAAnIQEAAAFQAgRXK8WJAwAFOS4zLjAACFNoYXNoYW5rABlTcHJpbmdib290RmFrZUNvbW1lcmNlRGV2
+2026-08-28T01:09:14,209+0530 [336 57] com.newrelic INFO: Agent 336@Shashank/SpringbootFakeCommerceDev connected to collector.newrelic.com:443
+2026-08-28T01:09:14,210+0530 [336 57] com.newrelic INFO: Reporting to: https://one.newrelic.com/redirect/entity/ODAyNzczMXxBUE18QVBQTElDQVRJT058MTQ2MjQ4NjQwOQ
+2026-08-28T01:09:14,215+0530 [336 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-08-28T01:09:14,215+0530 [336 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-08-28T01:09:14,215+0530 [336 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-08-28T01:09:14,223+0530 [336 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-08-28T01:09:14,223+0530 [336 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-08-28T01:09:14,224+0530 [336 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-08-28T01:09:14,974+0530 [336 57] com.newrelic INFO: Real user monitoring is enabled for application SpringbootFakeCommerceDev. Auto instrumentation is enabled.
+2026-08-28T01:09:14,975+0530 [336 57] com.newrelic INFO: Updating shared Adaptive Sampler sampling target to 120
+2026-08-28T01:09:14,978+0530 [336 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-09-02T23:35:25,255+0530 [27284 1] com.newrelic INFO: Writing to New Relic log file: C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\logs\newrelic_agent.log
+2026-09-02T23:35:25,256+0530 [27284 1] com.newrelic INFO: JRE vendor Oracle Corporation version 21.0.4
+2026-09-02T23:35:25,256+0530 [27284 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 21.0.4+8-LTS-274
+2026-09-02T23:35:25,256+0530 [27284 1] com.newrelic INFO: OS Windows 11 version 10.0 arch amd64
+2026-09-02T23:35:25,256+0530 [27284 1] com.newrelic INFO: Agent Host: Shashank IP: 10.101.190.68
+2026-09-02T23:35:25,257+0530 [27284 1] com.newrelic INFO: New Relic Agent v9.3.0 is initializing...
+2026-09-02T23:35:25,319+0530 [27284 1] com.newrelic INFO: AgentCollectionFactory: Using Caffeine 3.x for Java 21
+2026-09-02T23:35:26,595+0530 [27284 36] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2026-09-02T23:35:30,153+0530 [27284 1] com.newrelic INFO: Started Adaptive Sampler with sampling target 120 and report period 60 seconds.
+2026-09-02T23:35:30,155+0530 [27284 1] com.newrelic INFO: The full granularity root sampler was configured to use the adaptive sampler type.
+2026-09-02T23:35:30,155+0530 [27284 1] com.newrelic INFO: The full granularity remote_parent_sampled sampler was configured to use the adaptive sampler type.
+2026-09-02T23:35:30,155+0530 [27284 1] com.newrelic INFO: The full granularity remote_parent_not_sampled sampler was configured to use the adaptive sampler type.
+2026-09-02T23:35:30,160+0530 [27284 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2026-09-02T23:35:30,647+0530 [27284 1] com.newrelic INFO: Setting audit_mode to false
+2026-09-02T23:35:30,915+0530 [27284 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is C:\Users\KANHAIYA JHA\OneDrive\Desktop\FakeCommerce\newrelic\.\newrelic.yml
+2026-09-02T23:35:30,923+0530 [27284 1] com.newrelic INFO: New Relic Agent v9.3.0 has started
+2026-09-02T23:35:30,923+0530 [27284 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@2a098129
+2026-09-02T23:35:30,925+0530 [27284 1] com.newrelic INFO: Premain startup complete in 7,634ms
+2026-09-02T23:35:30,928+0530 [27284 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2026-09-02T23:35:39,657+0530 [27284 61] com.newrelic INFO: Server Info: Apache Tomcat/11.0.15
+2026-09-02T23:36:00,986+0530 [27284 57] com.newrelic INFO: Host name is Shashank, display host Shashank for application SpringbootFakeCommerceDev
+2026-09-02T23:36:00,990+0530 [27284 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2026-09-02T23:36:02,050+0530 [27284 57] com.newrelic INFO: Collector redirection to collector.newrelic.com:443
+2026-09-02T23:36:02,753+0530 [27284 57] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2026-09-02T23:36:02,754+0530 [27284 57] com.newrelic INFO: Agent run id: BSe9fBmeC0KqAHp-U1crw25qmGYAAAIBAAAnIQEAAGqUAgRXK8WJAwAFOS4zLjAACFNoYXNoYW5rABlTcHJpbmdib290RmFrZUNvbW1lcmNlRGV2
+2026-09-02T23:36:02,755+0530 [27284 57] com.newrelic INFO: Agent 27284@Shashank/SpringbootFakeCommerceDev connected to collector.newrelic.com:443
+2026-09-02T23:36:02,756+0530 [27284 57] com.newrelic INFO: Reporting to: https://one.newrelic.com/redirect/entity/ODAyNzczMXxBUE18QVBQTElDQVRJT058MTQ2MjQ4NjQwOQ
+2026-09-02T23:36:02,763+0530 [27284 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-09-02T23:36:02,764+0530 [27284 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-09-02T23:36:02,764+0530 [27284 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-09-02T23:36:02,775+0530 [27284 57] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2026-09-02T23:36:02,777+0530 [27284 57] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2026-09-02T23:36:02,777+0530 [27284 57] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2026-09-02T23:36:04,346+0530 [27284 57] com.newrelic INFO: Real user monitoring is enabled for application SpringbootFakeCommerceDev. Auto instrumentation is enabled.
+2026-09-02T23:36:04,347+0530 [27284 57] com.newrelic INFO: Updating shared Adaptive Sampler sampling target to 120
+2026-09-02T23:36:04,351+0530 [27284 57] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
