@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.FakeCommerce.dtos.GetOrderResponseDto;
 import com.example.FakeCommerce.dtos.OrderItemsResponseDto;
+import com.example.FakeCommerce.dtos.OrderSummaryResponseDto;
 import com.example.FakeCommerce.repositories.OrderProductsRepository;
 import com.example.FakeCommerce.schema.Order;
 import com.example.FakeCommerce.schema.OrderProducts;
@@ -53,6 +54,25 @@ public class OrderAdapter {
              .subTotal(op.getProduct().getPrice().multiply(BigDecimal.valueOf(op.getQuantity())))
              .build())
         .collect(Collectors.toList());
+    }
+
+    public OrderSummaryResponseDto mapToOrderSummaryResponseDto(Order order){
+        List<OrderProducts> orderProducts = orderProductsRepository.findByOrderId(order.getId());
+
+        int totalQuantity = orderProducts.stream().mapToInt(OrderProducts::getQuantity).sum();
+        BigDecimal totalAmount = orderProducts.stream()
+              .map(op -> op.getProduct().getPrice().multiply(BigDecimal.valueOf(op.getQuantity())))
+              .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return OrderSummaryResponseDto.builder()
+               .orderId(order.getId())
+               .status(order.getStatus())
+               .totalItems(orderProducts.size())
+               .totalQuantity(totalQuantity)
+               .totalAmount(totalAmount)
+               .createdAt(order.getCreatedAt())
+               .updatedAt(order.getUpdatedAt())
+               .build();
     }
 
 }

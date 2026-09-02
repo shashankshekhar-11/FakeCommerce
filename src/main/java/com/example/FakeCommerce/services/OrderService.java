@@ -12,6 +12,7 @@ import com.example.FakeCommerce.adapters.OrderAdapter;
 import com.example.FakeCommerce.dtos.CreateOrderRequestDto;
 import com.example.FakeCommerce.dtos.GetOrderResponseDto;
 import com.example.FakeCommerce.dtos.OrderItemActionDto;
+import com.example.FakeCommerce.dtos.OrderSummaryResponseDto;
 import com.example.FakeCommerce.dtos.UpdateOrderRequestDto;
 import com.example.FakeCommerce.exceptions.ResourceNotFoundException;
 import com.example.FakeCommerce.repositories.OrderProductsRepository;
@@ -121,7 +122,7 @@ public class OrderService {
             List<OrderProducts> toSave = new ArrayList<>();
             List<OrderProducts> toDelete = new ArrayList<>();
 
-            Map<Long,OrderProducts> existingItems = orderProductsRepository.findByOrderWithOroduct(order)
+            Map<Long,OrderProducts> existingItems = orderProductsRepository.findByOrderWithProduct(order)
             .stream()
             .collect(Collectors.toMap(op -> op.getProduct().getId(), Function.identity()));
 
@@ -133,10 +134,6 @@ public class OrderService {
                 switch (itemAction.getAction()) {
                     case ADD ->{
                         if(existing == null){
-                            int addQty = (itemAction.getQuantity() != null ? itemAction.getQuantity() : 1);
-                            existing.setQuantity(existing.getQuantity()+addQty);
-                            toSave.add(existing);
-                        }else{
                             OrderProducts newItem = OrderProducts
                                                     .builder()
                                                     .order(order)
@@ -146,6 +143,10 @@ public class OrderService {
 
                             existingItems.put(product.getId(), newItem);
                             toSave.add(newItem);
+                        }else{
+                            int addQty = (itemAction.getQuantity() != null ? itemAction.getQuantity() : 1);
+                            existing.setQuantity(existing.getQuantity()+addQty);
+                            toSave.add(existing);
                         }
                     }
                     case REMOVE ->{
@@ -186,6 +187,12 @@ public class OrderService {
 
         }
         return orderAdapter.mapToGetOrderResponseDto(order);
+    }
+
+    public OrderSummaryResponseDto getOrderSummary(Long id){
+        Order order = orderRepository.findById(id)
+              .orElseThrow(()-> new ResourceNotFoundException("Order not found with id "+id));
+        return orderAdapter.mapToOrderSummaryResponseDto(order);
     }
 }
 

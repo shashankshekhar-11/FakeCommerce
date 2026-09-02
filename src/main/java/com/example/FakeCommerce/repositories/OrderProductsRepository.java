@@ -10,7 +10,7 @@ import com.example.FakeCommerce.schema.OrderProducts;
 
 public interface OrderProductsRepository extends JpaRepository<OrderProducts, Long> {
     List<OrderProducts> findByOrderId(Long orderId);
-    @Query("SELECT op FROM OrderProducts op JOIN FETCH op.product WHERE op.order.id = :orderId")
-    List<OrderProducts> findByOrderWithOroduct(Order order);
+    @Query("SELECT op FROM OrderProducts op JOIN FETCH op.product WHERE op.order = :order")
+    List<OrderProducts> findByOrderWithProduct(Order order);
 }
 

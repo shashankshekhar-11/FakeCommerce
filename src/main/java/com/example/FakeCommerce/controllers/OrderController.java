@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FakeCommerce.dtos.CreateOrderRequestDto;
 import com.example.FakeCommerce.dtos.GetOrderResponseDto;
+import com.example.FakeCommerce.dtos.OrderSummaryResponseDto;
+import com.example.FakeCommerce.dtos.UpdateOrderRequestDto;
 import com.example.FakeCommerce.schema.Order;
 import com.example.FakeCommerce.services.OrderService;
 import com.example.FakeCommerce.utils.ApiResponse;
@@ -33,8 +36,10 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<GetOrderResponseDto>> createOrder(@RequestBody CreateOrderRequestDto createOrderRequestDto){
+        GetOrderResponseDto order = orderService.createOrder(createOrderRequestDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(order, "Order created successfully"));
     }
 
     @DeleteMapping("/{id}")
@@ -56,12 +61,16 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable Long id, @RequestBody Order order){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<GetOrderResponseDto>> updateOrder(@PathVariable Long id, @RequestBody UpdateOrderRequestDto updateOrderRequestDto){
+        GetOrderResponseDto order = orderService.updateOrder(id, updateOrderRequestDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(order, "Order updated successfully"));
     }
 
     @GetMapping("/{id}/summary")
-    public void getOrderSummary(@PathVariable Long id){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<OrderSummaryResponseDto>> getOrderSummary(@PathVariable Long id){
+        OrderSummaryResponseDto summary = orderService.getOrderSummary(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(summary, "Order summary fetched successfully"));
     }
 }

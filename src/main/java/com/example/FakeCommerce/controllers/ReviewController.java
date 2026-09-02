@@ -2,6 +2,8 @@ package com.example.FakeCommerce.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,39 +12,58 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FakeCommerce.dtos.GetReviewResponseDto;
 import com.example.FakeCommerce.schema.Review;
-
+import com.example.FakeCommerce.services.ReviewService;
+import com.example.FakeCommerce.utils.ApiResponse;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/reviews")
 @RequiredArgsConstructor
-
-
 public class ReviewController {
+    private final ReviewService reviewService;
+
     @GetMapping
-    public List<Review> getAllReviews(){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<List<GetReviewResponseDto>>> getAllReviews(){
+        List<GetReviewResponseDto> reviews = reviewService.getAllReviews();
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(reviews, "Reviews fetched successfully"));
     }
+
     @PostMapping
-    public Review createReview(@RequestBody Review review){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<GetReviewResponseDto>> createReview(@RequestBody Review review){
+        GetReviewResponseDto createdReview = reviewService.createReview(review);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(createdReview, "Review created successfully"));
     }
+
     @DeleteMapping("/{id}")
-    public void deleteReview(@PathVariable Long id){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<Void>> deleteReview(@PathVariable Long id){
+        reviewService.deleteReview(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(null, "Review deleted successfully"));
     }
+
     @GetMapping("/{id}")
-    public Review getReviewById(@PathVariable Long id){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<GetReviewResponseDto>> getReviewById(@PathVariable Long id){
+        GetReviewResponseDto review = reviewService.getReviewById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(review, "Review fetched successfully"));
     }
+
     @GetMapping("/product/{productId}")
-    public List<Review> getReviewsByProductId(@PathVariable Long productId){
-        throw new UnsupportedOperationException("Not implemented");
+    public ResponseEntity<ApiResponse<List<GetReviewResponseDto>>> getReviewsByProductId(@PathVariable Long productId){
+        List<GetReviewResponseDto> reviews = reviewService.getReviewsByProductId(productId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(reviews, "Reviews fetched successfully"));
     }
-   @GetMapping("/order/{orderId}")
-   public List<Review> getReviewsByOrderId(@PathVariable Long orderId){
-    throw new UnsupportedOperationException("Not implemented");
-   }
+
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<ApiResponse<List<GetReviewResponseDto>>> getReviewsByOrderId(@PathVariable Long orderId){
+        List<GetReviewResponseDto> reviews = reviewService.getReviewsByOrderId(orderId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(reviews, "Reviews fetched successfully"));
+    }
 }
