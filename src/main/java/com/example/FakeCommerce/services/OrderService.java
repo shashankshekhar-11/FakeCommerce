@@ -25,7 +25,9 @@ import com.example.FakeCommerce.schema.Product;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 
@@ -38,12 +40,13 @@ public class OrderService {
     public final OrderAdapter orderAdapter;
 
     public List<GetOrderResponseDto> getAllOrders(){
-
+        log.debug("Fetching all orders");
         List<Order> orders = orderRepository.findAll();
         return orderAdapter.mapToGetOrderResponseDtoList(orders);
     }
 
     public GetOrderResponseDto getOrderById(Long id){
+        log.debug("Fetching order with id {}", id);
         Order order = orderRepository.findById(id)
               .orElseThrow(()-> new ResourceNotFoundException("Order not founf with id "+id));
         return orderAdapter.mapToGetOrderResponseDto(order);
@@ -53,6 +56,7 @@ public class OrderService {
         Order order = orderRepository.findById(id)
               .orElseThrow(()-> new ResourceNotFoundException("Order not found with id "+id));
         orderRepository.delete(order);
+        log.info("Order with id {} deleted successfully", id);
     }
 
     @Transactional
@@ -92,8 +96,9 @@ public class OrderService {
             }
             orderProductsRepository.saveAll(orderProducts);
           }
-        }  
+        }
         //return order
+        log.info("Order created with id {}", order.getId());
         return orderAdapter.mapToGetOrderResponseDto(order);
     }
 
@@ -187,10 +192,12 @@ public class OrderService {
             }
 
         }
+        log.info("Order with id {} updated successfully", id);
         return orderAdapter.mapToGetOrderResponseDto(order);
     }
 
     public OrderSummaryResponseDto getOrderSummary(Long id){
+        log.debug("Fetching summary for order with id {}", id);
         Order order = orderRepository.findById(id)
               .orElseThrow(()-> new ResourceNotFoundException("Order not found with id "+id));
         return orderAdapter.mapToOrderSummaryResponseDto(order);

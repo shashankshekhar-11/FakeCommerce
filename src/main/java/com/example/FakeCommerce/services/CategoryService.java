@@ -13,7 +13,9 @@ import com.example.FakeCommerce.repositories.CategoryRepository;
 import com.example.FakeCommerce.schema.Category;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -30,10 +32,13 @@ public class CategoryService {
         Category newCategory = Category.builder()
                     .name(requestDto.getName())
                     .build();
-        return categoryRepository.save(newCategory);
+        Category savedCategory = categoryRepository.save(newCategory);
+        log.info("Category '{}' created with id {}", savedCategory.getName(), savedCategory.getId());
+        return savedCategory;
     }
 
      public List<Category> getAllCategories(){
+        log.debug("Fetching all categories");
         return categoryRepository.findAll();
     }
 
@@ -42,6 +47,7 @@ public class CategoryService {
             throw new BadRequestException("Category id must be a positive number");
         }
 
+        log.debug("Fetching category with id {}", id);
         return categoryRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Category with id " + id + " not found"));
     }
@@ -56,8 +62,10 @@ public class CategoryService {
         }
         try {
             categoryRepository.deleteById(id);
+            log.info("Category with id {} deleted sucessfully",id);
         } catch (DataIntegrityViolationException ex) {
             throw new ResourceDeletionException("Category with id " + id + " cannot be deleted because it is linked to other records");
+
         }
     }
 }

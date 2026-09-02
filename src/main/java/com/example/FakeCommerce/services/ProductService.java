@@ -17,7 +17,9 @@ import com.example.FakeCommerce.schema.Category;
 import com.example.FakeCommerce.schema.Product;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductService  {
@@ -25,6 +27,7 @@ public class ProductService  {
     private final CategoryService categoryService;
 
     public List<GetProductResponseDto> getAllProducts(){
+        log.debug("Fetching all products");
          List<Product> products =  productRepository.findAll();
         // List<GetProductResponseDto> responseDtos = new ArrayList<>();
         // for(Product product: products){
@@ -60,6 +63,7 @@ public class ProductService  {
             throw new BadRequestException("Product id must be a positive number");
         }
 
+        log.debug("Fetching product with id {}", id);
          return productRepository.findById(id)
             .map(product -> GetProductResponseDto.builder()
                 .id(product.getId())
@@ -77,6 +81,7 @@ public class ProductService  {
             throw new BadRequestException("Product id must be a positive number");
         }
 
+        log.debug("Fetching product with details for id {}", id);
         Product product = productRepository.findProductWithDetailsById(id).stream()
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
@@ -112,8 +117,10 @@ public class ProductService  {
                             .rating(requestDto.getRating())
                             .build();
 
-        return productRepository.save(newProduct);
-    } 
+        Product savedProduct = productRepository.save(newProduct);
+        log.info("Product '{}' created with id {}", savedProduct.getTitle(), savedProduct.getId());
+        return savedProduct;
+    }
     public void deleteProduct(Long id) {
         if (id == null || id <= 0) {
             throw new BadRequestException("Product id must be a positive number");
@@ -125,6 +132,7 @@ public class ProductService  {
 
         try {
             productRepository.deleteById(id);
+            log.info("Product with id {} deleted successfully", id);
         } catch (DataIntegrityViolationException ex) {
             throw new ResourceDeletionException("Product with id " + id + " cannot be deleted because it is linked to other records");
         }
@@ -134,10 +142,12 @@ public class ProductService  {
         if (category == null || category.trim().isEmpty()) {
             throw new BadRequestException("categoryName query parameter is required");
         }
+        log.debug("Fetching products for category '{}'", category);
         return productRepository.findByCategory(category);
     }
 
     public List<String> getAllCategories() {
+        log.debug("Fetching distinct product categories");
         return productRepository.findAllCategories();
     }
 }
