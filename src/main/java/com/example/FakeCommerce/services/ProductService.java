@@ -1,6 +1,7 @@
 package com.example.FakeCommerce.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,7 @@ import com.example.FakeCommerce.exceptions.ResourceNotFoundException;
 import com.example.FakeCommerce.repositories.ProductRepository;
 import com.example.FakeCommerce.schema.Category;
 import com.example.FakeCommerce.schema.Product;
+import com.example.FakeCommerce.services.cache.ProductRedisCache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductService  {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
+     private final ProductRedisCache productRedisCache;
 
     public List<GetProductResponseDto> getAllProducts(){
         log.debug("Fetching all products");
+       
          List<Product> products =  productRepository.findAll();
         // List<GetProductResponseDto> responseDtos = new ArrayList<>();
         // for(Product product: products){
@@ -64,7 +68,11 @@ public class ProductService  {
         }
 
         log.debug("Fetching product with id {}", id);
-         return productRepository.findById(id)
+        Optional<GetProductResponseDto>cachedSummary = productRedisCache.getSummary(id);
+        if(cachedSummary.isPresent()){
+            return  cachedSummary.get();
+        }
+         GetProductResponseDto response = productRepository.findById(id)
             .map(product -> GetProductResponseDto.builder()
                 .id(product.getId())
                 .title(product.getTitle())
@@ -74,6 +82,8 @@ public class ProductService  {
                 .rating(product.getRating())
                 .build())
             .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
+            productRedisCache.putSummary(id,response);
+            return response;
     }
 
     public GetProductWithDetailsResponseDto getProductWithDetailsById(Long id){
